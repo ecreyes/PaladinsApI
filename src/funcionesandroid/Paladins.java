@@ -10,6 +10,12 @@ public class Paladins {
     private static final String DEVID = "2858";
     private static final String AUTHKEY = "501970C223CF474BACD0493FCD62A66A";
     private static final SimpleDateFormat SDF = new SimpleDateFormat("yyyyMMddHHmmss");
+    //AGREGARLO UNA VEZ OBTENIDO
+    private static String SESSIONID = "";
+    
+    public static void setSessionID(String session){
+        SESSIONID = session;
+    }
     
     private static String getTimeStamp(){
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
@@ -42,6 +48,18 @@ public class Paladins {
         String methodJson = method+"Json";
         try{
             url = PATH+"/"+methodJson+"/"+DEVID+"/"+Paladins.getSignature(method)+"/"+Paladins.getTimeStamp();
+            return url;
+        }catch(Exception e){
+            e.printStackTrace();
+            return url;
+        }
+    }
+    
+    public static String getUrl(String method){
+        String url = "";
+        String methodJson = method+"Json";
+        try{
+            url = PATH+"/"+methodJson+"/"+DEVID+"/"+Paladins.getSignature(method)+"/"+SESSIONID+"/"+Paladins.getTimeStamp();
             return url;
         }catch(Exception e){
             e.printStackTrace();
